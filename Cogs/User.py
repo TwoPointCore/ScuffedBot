@@ -68,11 +68,15 @@ class User(commands.Cog):
                         try:
                             msg = await self.client.wait_for('message', timeout=30, check=lambda message: message.author == ctx.author and message.channel == ctx.channel)
                             birthday = msg.content
+                            storer = msg.split('/')
+                            if(storer[0]>12 or storer[0]<1 or storer[1]>31 or storer[1]<1):
+                                birthday = "baka!!!"
+                                return
                             a = False
                             print(birthday)
                             if ((bool(re.search(r"\d/", birthday)))) is False:
                                 print ("Birthday input validation triggered")
-                                await ctx.send("Oopsie, looks like you did a woopsie! uwu\n``Don't use characters expect for numbers and /``")
+                                await ctx.send("Oopsie, looks like you did a woopsie! uwu\n``Don't use characters expect for numbers and /, also, make sure you chose a real birthday b-baka!!!``")
                                 return
                             doc_ref = dab.collection(str(ctx.author.id)).document('data')
                             doc_ref.set({
